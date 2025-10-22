@@ -3,13 +3,18 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(express.json());
 
-// ✅ Default route
+// Default route
 app.get("/", (req, res) => {
   res.send("🚀 Atlas Automation API is running...");
 });
 
-// ✅ Example endpoint: /api
+// Keep server running
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
