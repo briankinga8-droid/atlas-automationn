@@ -1,12 +1,8 @@
 import express from "express";
-import dotenv from "dotenv";
+import cors from "cors";
 
-dotenv.config();
 const app = express();
-
-const PORT = process.env.PORT || 3000;
-
-// Middleware
+app.use(cors());
 app.use(express.json());
 
 // Default route
@@ -14,7 +10,13 @@ app.get("/", (req, res) => {
   res.send("🚀 Atlas Automation API is running...");
 });
 
-// Keep server running
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// ✅ Status route
+app.get("/status", (req, res) => {
+  res.json({
+    status: "✅ Atlas Automation API is live and operational.",
+    timestamp: new Date().toLocaleString(),
+  });
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
